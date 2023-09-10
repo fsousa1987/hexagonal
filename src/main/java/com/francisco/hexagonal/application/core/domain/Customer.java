@@ -4,15 +4,15 @@ package com.francisco.hexagonal.application.core.domain;
 public class Customer {
 
     public Customer() {
-        this.isValidCpf = false;
+        this.validCpf = false;
     }
 
-    public Customer(String id, String name, Address address, String cpf, Boolean isValidCpf) {
+    public Customer(String id, String name, Address address, String cpf, Boolean validCpf) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.cpf = cpf;
-        this.isValidCpf = isValidCpf;
+        this.validCpf = validCpf;
     }
 
     private String id;
@@ -23,7 +23,7 @@ public class Customer {
 
     private String cpf;
 
-    private Boolean isValidCpf;
+    private Boolean validCpf;
 
     public String getId() {
         return id;
@@ -58,11 +58,11 @@ public class Customer {
     }
 
     public Boolean getValidCpf() {
-        return isValidCpf;
+        return validCpf;
     }
 
     public void setValidCpf(Boolean validCpf) {
-        isValidCpf = validCpf;
+        this.validCpf = validCpf;
     }
 
 }
