@@ -2,16 +2,13 @@ package com.francisco.hexagonal.adapters.in.controller;
 
 import com.francisco.hexagonal.adapters.in.controller.mapper.CustomerMapper;
 import com.francisco.hexagonal.adapters.in.controller.request.CustomerRequest;
+import com.francisco.hexagonal.adapters.in.controller.response.CustomerResponse;
+import com.francisco.hexagonal.application.ports.in.FindCustomerByIdInputPort;
 import com.francisco.hexagonal.application.ports.in.InsertCustomerInputPort;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/customers")
@@ -19,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
 
     private final InsertCustomerInputPort insertCustomerInputPort;
+    private final FindCustomerByIdInputPort findCustomerByIdInputPort;
     private final CustomerMapper customerMapper;
 
     @PostMapping
@@ -26,6 +24,13 @@ public class CustomerController {
         var customer = customerMapper.toCustomer(customerRequest);
         insertCustomerInputPort.insert(customer, customerRequest.getZipCode());
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerResponse> findById(@PathVariable final String id) {
+        var customer = findCustomerByIdInputPort.find(id);
+        var customerResponse = customerMapper.toCustomerResponse(customer);
+        return ResponseEntity.ok().body(customerResponse);
     }
 
 }
