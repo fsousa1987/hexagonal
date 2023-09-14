@@ -1,5 +1,6 @@
 services:
   wiremock:
+    container_name: wiremock
     image: wiremock/wiremock:latest
     ports:
       - "8082:8080"
