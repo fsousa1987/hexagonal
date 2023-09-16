@@ -19,7 +19,7 @@ public class KafkaProducerConfig {
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
-        configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9093");
         configProps.put(GROUP_ID_CONFIG, "francisco");
         configProps.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
