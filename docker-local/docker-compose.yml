@@ -1,12 +1,4 @@
 services:
-  wiremock:
-    container_name: wiremock
-    image: wiremock/wiremock:latest
-    ports:
-      - "8082:8080"
-    volumes:
-      - ./mappings:/home/wiremock/mappings
-
   zookeeper:
     restart: always
     image: docker.io/bitnami/zookeeper:3.8
